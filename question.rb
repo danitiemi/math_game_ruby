@@ -1,5 +1,5 @@
 class Question 
-    attr_reader(:answer)
+    attr_reader(:correct_answer)
 
    
     # new question is generated for each turn 
@@ -7,15 +7,13 @@ class Question
     def initialize
         @first_number = rand(1..20)
         @second_number = rand(1..20)
-    end
-    
+        
      # simple math addition problems
-    def math_question
         @correct_answer = @first_number + @second_number
     end
     
     def question_display
-        "What does #{first_number} plus #{second_number} equal?"
+        "What does #{@first_number} plus #{@second_number} equal?"
     end
 
     # must answer correctly or lose a life.
@@ -26,3 +24,4 @@ class Question
             false
         end
     end
+end
