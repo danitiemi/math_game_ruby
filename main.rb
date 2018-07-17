@@ -3,7 +3,9 @@ require './question'
 
 @repl_bool = true
 
-puts "Do you like math??? So... let's play! \n"
+puts ''
+puts "Do you like math??? So... let's play!"
+puts ''
 
 print "Player 1 name: "
 @player_name = gets.chomp
@@ -15,13 +17,16 @@ print "Player 2 name: "
 p2 = Player.new(@player_name)
 p2.name = p2.name
 
-puts
+puts ''
 puts "Are you ready for it?"
+puts ''
 
 @player_turn = 0
 
 while @repl_bool
     question = Question.new
+
+    puts "---- NEW TURN ----"
 
     case @player_turn
         when 0
@@ -31,7 +36,7 @@ while @repl_bool
     end
 
     print question.question_display
-    puts
+    puts ''
     print '> '
 
     @player_answer = gets.chomp.to_i
@@ -48,28 +53,33 @@ while @repl_bool
 
     elsif @player_turn == 1 && question.answer_correct?(@player_answer)
         puts 'Yes! You are correct.'
-        p1.score_point
+        p2.score_point
         @player_turn -= 1
         
     elsif @player_turn == 1 && !question.answer_correct?(@player_answer)
         puts 'Seriously? No!'
-        p1.lose_life
+        p2.lose_life
         @player_turn -= 1
     
     end
 
-    puts "#{p1.name}: #{p1.correct_answers}/3 vs #{p2.name}: #{p2.correct_answers}/3 \n"
+    puts "#{p1.name}: #{p1.lives}/3 vs #{p2.name}: #{p2.lives}/3"
+    puts ''
 
     if p1.lives < 1 || p2.lives < 1
-        puts "---- GAME OVER ---- \n Good Bye!"
+        puts "---- GAME OVER ----"
 
         if p1.lives < 1
-            puts "#{p2.name} wins with a score of #{p2.correct_answers}/3!"
+            puts "#{p2.name} wins with a score of #{p2.lives}/3!"
 
         elsif p2.lives < 1
-            puts "#{p1.name} wins with a score of #{p1.correct_answers}/3!"
+            puts "#{p1.name} wins with a score of #{p1.lives}/3"
 
         end
+
+        puts ''
+        puts 'Good Bye!'
+        puts ''
 
         @repl_bool = false
     end
