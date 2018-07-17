@@ -1,8 +1,8 @@
 class Player
-    attr_accessor(:id, :lives, :correct_answers)
+    attr_accessor(:name, :lives, :correct_answers)
 
     def initialize(id, lives=3)
-        @id = id
+        @name = name
         @lives = lives
         @correct_answers = 0
     end
